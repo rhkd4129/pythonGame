@@ -16,7 +16,7 @@ def printSadari():
                          print(sadari[row][col],end=" ")
         print()
 
-        
+
 
 # 사다리줄에맞게 배열 초기화
 for row in range(12):
@@ -44,6 +44,6 @@ for t in range(num-1):
         for x in roadPosList:
             sadari[x][a] = 1
         a = a+2
-      
+
 
 printSadari()

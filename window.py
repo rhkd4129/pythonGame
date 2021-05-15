@@ -1,4 +1,6 @@
 from tkinter import*
+import sadariLogic
+import sadariprint
 
 # pack(side =  "top",left,right,bottom,   padx = 20, pady 20)
 # grid(column =0,row = 2)       gird(column = 2,row -0,rowspan =2 // columnspan = 2)
@@ -7,20 +9,24 @@ from tkinter import*
 main = Tk()
 main.title("window")
 
-# 창안에 위젯들 삭제 
+# 창안에 위젯들 삭제
 def Clear():
   for w in main.place_slaves():
       w.destroy()
 
-    
+
 def GOClick():
   global ent_num
+  global sadariarray
+  sadariarray = []
   ent_num = int(ent.get())
+  sadariarray = sadariLogic.SadariInit(ent_num)
+  sadariLogic.printSadari(sadariarray, ent_num)
   Clear()
-  main.geometry("800x500")   
+  main.geometry("800x500")
   main.option_add("*Font","맑은고딕 15")
   a=1
-  
+
   for i in range(ent_num):
         i = Entry(main)
         i.place(x = 50*a,y =35)
@@ -34,9 +40,10 @@ def GOClick():
         a +=2
   PlayBtn()
   BackBtn()
+  sadariprint.PrintSadari(main, ent_num, sadariarray)
 
 
-  
+
 
 def PlayBtn():
   Playbtn = Button(main)
@@ -51,12 +58,12 @@ def BackBtn():
   Backbtn.config(command = BackClick)
 
 
-  
+
 def PlayClick():
   entList=[]
   for x  in main.place_slaves():
     entList.append(x)
-  Clear()  
+  Clear()
   main.geometry("800x400")
   for x in entList:
     x = Label(main)
@@ -65,7 +72,7 @@ def PlayClick():
 
 
 def BackClick():
-  
+
   Clear()
   mainWindow()
 
