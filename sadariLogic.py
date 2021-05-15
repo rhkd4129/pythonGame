@@ -41,7 +41,7 @@ def SadariVerticalLine(sadari, PeopleNum):
 
 #가로줄 초기화
 def SadarihorizontalLine(sadari, PeopleNum):
-    num = int((PeopleNum+1)/2)
+    num = int((PeopleNum+1)/2) # 인원수
     a=1
     for t in range(num-1):
         roadPosList.clear()
@@ -51,11 +51,21 @@ def SadarihorizontalLine(sadari, PeopleNum):
         while True:
             roadPos = randint(1,10)
             if(not roadPos in roadPosList):
+                if(sadari[roadPos][a] == 2):
+                    print("pass")
+                    continue
                 roadPosList.append(roadPos)
                 if len(roadPosList) == roadNumber:
                     break
         for x in roadPosList:
             sadari[x][a] = 1
+        for x in roadPosList:
+            if(a<PeopleNum - 2):
+                sadari[x][a+2] = 2
+        print(a)
+        for i in sadari:
+            print(i)
+        print()
         a = a+2
 
     return sadari
