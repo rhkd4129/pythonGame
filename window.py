@@ -60,15 +60,26 @@ def BackBtn():
 
 
 def PlayClick():
+  global ent_num
+  i = 0
   entList=[]
   for x  in main.place_slaves():
     entList.append(x)
+
+  # Entry의 텍스트를 모두 추출하는 부분
+  # 아래에서 말고 위에서 하는 이유는 중간에 Clear()부분에서
+  # Entry가 모두 제거되기 때문에 Clear() 뒤에 텍스트를 추출 못함
+  for x in entList:
+    if str(type(x)) == "<class 'tkinter.Entry'>":
+      print(1)
   Clear()
   main.geometry("800x400")
   for x in entList:
-    x = Label(main)
-    x.config(text = x)
-    x.pack()
+    # Entry클래스만 확인하는 부분
+    if str(type(x)) == "<class 'tkinter.Entry'>":
+      x = Label(main)
+      x.config(text = x)
+      x.pack()
 
 
 def BackClick():

@@ -2,6 +2,13 @@ from tkinter import*
 
 
 #entry의 width = 6은 70px 정도 됨
+# 사다리 출력 함수
+################################
+# PrintSadari(window, ent_num, array):
+# window - 최상위 위젯
+# ent_num - 인원수
+# array - 사다리타기 배열
+################################
 def PrintSadari(window, ent_num, array):
     window = window
     wid = ((ent_num-1)*100)+70 # 인원수에 따른 캔버스폭 변화
