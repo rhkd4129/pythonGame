@@ -97,3 +97,26 @@ def SadarihorizontalLine(sadari, PeopleNum):
         a = a+2
 
     return sadari
+
+
+def SadariResult(sadari):
+    sadariarray = sadari
+    namelist = []
+    resultlist = []
+    namelist.append(sadari[0])
+    resultlist.append(sadari[-1])
+    pNum = int(len(namelist)/2)+1
+    for i in range(pNum-1):
+        namelist.remove(0)
+        resultlist.remove(0)
+
+    hlist = []
+    for i in range(1,11):
+        temp = []
+        for j in range(1,len(sadariarray[0]), 2):
+            temp.append(sadariarray[i][j])
+        hlist.append(temp)
+
+    print(namelist)
+    print(resultlist)
+    print(hlist)

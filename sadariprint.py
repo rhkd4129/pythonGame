@@ -1,6 +1,18 @@
 from tkinter import*
 
 
+# 사다리 세로줄 출력 함수
+###############################
+# PrintVline(canvas, ent_num)
+# canvas - 그려지는 캔버스
+# ent_num - 인원수
+###############################
+def PrintVline(canvas, ent_num):
+    c = canvas
+    num = ent_num
+    for i in range(ent_num):
+        c.create_line(35+i*100, 0, 35+i*100, 310)
+
 #entry의 width = 6은 70px 정도 됨
 # 사다리 출력 함수
 ################################
@@ -9,15 +21,11 @@ from tkinter import*
 # ent_num - 인원수
 # array - 사다리타기 배열
 ################################
-def PrintSadari(window, ent_num, array):
-    window = window
-    wid = ((ent_num-1)*100)+70 # 인원수에 따른 캔버스폭 변화
+def PrintSadari(canvas, ent_num, array):
+    c = canvas
     num = ent_num
-    w = Canvas(window, width=wid, height=310) # 캔버스 생성
-    w.place(x = 50, y = 60) # 캔버스 위치 조정
     # 세로줄 그리기
-    for i in range(ent_num):
-        w.create_line(35+i*100, 0, 35+i*100, 310)
+    PrintVline(c,num)
 
     # 가로줄 그리기
     for i in range(1,11):
@@ -29,4 +37,4 @@ def PrintSadari(window, ent_num, array):
             # *100은 entry위젯 간의 거리
             # 10은 위 아래 약간의 간격
             # 29는 가로줄 사이 간격
-            w.create_line(35+a*100, 10+i*29, 35+(a+1)*100, 10+i*29)
+            c.create_line(35+a*100, 10+i*29, 35+(a+1)*100, 10+i*29)
