@@ -2,9 +2,79 @@ from tkinter import*
 import sadariLogic
 import sadariprint
 
+
+
+
 # pack(side =  "top",left,right,bottom,   padx = 20, pady 20)
 # grid(column =0,row = 2)       gird(column = 2,row -0,rowspan =2 // columnspan = 2)
 # place(x = 20, y =29// relx = 0.3 rely = 0.4 상대적 위치)
+def sadariresultshow(sadariarray,ent_num,k):
+       column =0
+       row = k
+       while True:
+               #왼쪽 끝 줄일때
+               if(row ==0):
+                        #print("왼쪽 줄 끝입니다")
+                        if(sadariarray[column+1][row] ==1):
+                                #오른쪽다리가 있을떄
+                                if(sadariarray[column][row+1] == 1):
+                                        row = row+2
+                                        column = column+1
+                                        if(column ==11):
+                                                break
+                                        #print("오른쪽으로 이동하고 한칸 아래로",column,row)
+                                #그냥 아래로
+                                else:
+                                        column = column+1
+                                        if(column ==11):
+                                                break
+                                        #print("아래로이동",column,row)
+                #오른쪽 끝 줄일때
+               elif(row ==(ent_num*2)-2 ):
+                        #print("오른쪽 끝줄입니다")
+                        if(sadariarray[column+1][row] ==1):
+                                        #왼쪽다리가 있을떄
+                                        if(sadariarray[column][row-1] == 1):
+                                                row = row-2
+                                                column = column+1
+                                                if(column ==11):
+                                                       break
+                                                #print("왼쪽으로 이동하고 한칸 아래로",column,row)
+                                        #그냥 아래로
+                                        else:
+                                                column = column+1
+                                                if(column ==11):
+                                                        break
+                                                #print("아래로이동",column,row)
+               else:
+                        #print("양옆에 공간이 있습니다")
+                        if(sadariarray[column+1][row] ==1):
+
+                                #오른쪽 다리가 있을 떄
+                                if(sadariarray[column][row+1] == 1):
+                                        row = row+2
+                                        column = column+1
+                                        if(column ==11):
+                                                       break
+                                        #print("오른쪽으로 이동하고 한칸 아래로",column,row)
+
+                                #왼쪽다리가 있을때
+                                elif(sadariarray[column][row-1] == 1):
+                                        row = row-2
+                                        column = column+1
+                                        if(column ==11):
+                                                       break
+                                        #print("왼쪽으로 이동하고 한칸 아래로",column,row)
+
+                                #그냥 아래로
+                                else:
+                                        column = column+1
+                                        if(column ==11):
+                                                break
+                                        #print("아래로이동",column,row)
+       return row
+
+
 
 main = Tk()
 main.title("window")
@@ -148,7 +218,6 @@ def PlayClick():
 
 
 def BackClick():
-
     Clear()
     mainWindow()
 
@@ -156,6 +225,9 @@ def BackClick():
 def ResultClick():
     global entList
     global nrlist
+    global resultlist  #결과값의 x좌표
+    global rlist
+    resultlist = []
     nlist = []
     rlist = []
     Clear()
@@ -165,6 +237,18 @@ def ResultClick():
     ResultLabel = Label(main, text = "결과")
     ResultLabel.place(x=50, y=25)
     nlist, rlist = nrsort(nrlist)
+
+    k=0
+    for x in range(ent_num):
+        resultlist.append(sadariresultshow(sadariarray,ent_num,k))
+        k = k+2
+
+    #rlist 홀수 인덱스에 0추가
+    k=1
+    for x in range(ent_num-1):
+        rlist.insert(k,0)
+        k = k+2
+
     a=0
     for i in range(ent_num):
         i = Label(main, text=nlist[i])
@@ -174,10 +258,23 @@ def ResultClick():
 
     a = 0
     for i in range(ent_num):
-        i = Label(main, text=rlist[i])
+        i = Label(main,text = rlist[resultlist[i]])
         i.place(x = 350,y =135+(40*(a+1)))
         i.config(width = 6)
         a += 1
+
+    rilstReset()
+
+
+    #rilst 다시 원래대로
+def rilstReset():
+    global ent_num
+    global rlist
+    k=1
+    for x in range(ent_num-1):
+        del rlist[k]
+        k = k+2
+    return rlist
 
 
 def mainWindow():
